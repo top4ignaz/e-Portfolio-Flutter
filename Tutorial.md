@@ -514,5 +514,5 @@ class FormResultPage extends StatelessWidget {
 ```
 ## Conclusion
 
-We hope you find this tutorial helpful and we could spark an interest in you. Feel free to check out the repository for our full project code [here] (https://github.com/top4ignaz/e-Portfolio-Flutter/tree/master/tutorial_app). 
+We hope you find this tutorial helpful and we could spark an interest in you. Feel free to check out the repository for our full project code [here](https://github.com/top4ignaz/e-Portfolio-Flutter/tree/master/tutorial_app). 
 
