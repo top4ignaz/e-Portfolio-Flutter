@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './form_result_page.dart';
 
 class FormPage extends StatefulWidget {
   @override
@@ -6,11 +7,13 @@ class FormPage extends StatefulWidget {
 }
 
 class _MyFormPageState extends State<FormPage> {
-  String _value;
-  double _sliderValue = 1.0;
-  bool _activated = false;
+  String name;
+  String dropDownValue;
+  double sliderValueGreen = 5.0;
+  double sliderValueRed = 5.0;
+  double sliderValueBlue = 5.0;
+  bool activated = false;
   TextEditingController myController = TextEditingController();
-  Icon dropDownValue = Icon(Icons.access_alarms);
 
   Widget _buildTextAndDropDownRow() {
     return Row(
@@ -49,10 +52,10 @@ class _MyFormPageState extends State<FormPage> {
             ],
             onChanged: (value) {
               setState(() {
-                _value = value;
+                dropDownValue = value;
               });
             },
-            value: _value,
+            value: dropDownValue,
             isExpanded: false,
           ),
         ),
@@ -60,7 +63,28 @@ class _MyFormPageState extends State<FormPage> {
     );
   }
 
-  Widget _buildSliderButtonRow() {
+  Widget _buildSlidersAndSwitches() {
+    return Column(
+      children: <Widget>[
+        _buildSliderButtonRowGreen(),
+        _buildSliderButtonRowRed(),
+        _buildSliderButtonRowBlue(),
+        Container(
+          child: Switch(
+              value: activated,
+              activeColor: Colors.green,
+              activeTrackColor: Colors.green,
+              inactiveTrackColor: Colors.red,
+              inactiveThumbColor: Colors.red,
+              onChanged: (bool active) {
+                setState(() => activated = active);
+              }),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSliderButtonRowGreen() {
     return Row(
       children: <Widget>[
         Expanded(
@@ -68,25 +92,59 @@ class _MyFormPageState extends State<FormPage> {
           child: Slider(
             min: 0.0,
             max: 255.0,
-            value: _sliderValue,
+            divisions: 255,
+            value: sliderValueGreen,
             activeColor: Colors.green,
             onChanged: (newRating) {
-              setState(() => _sliderValue = newRating);
+              setState(() => sliderValueGreen = newRating);
             },
           ),
         ),
+        Text('${this.sliderValueGreen.toStringAsFixed(0)}'),
+        SizedBox(width: 5.0,),
+      ],
+    );
+  }
+
+  Widget _buildSliderButtonRowRed() {
+    return Row(
+      children: <Widget>[
         Expanded(
-          flex: 1,
-          child: Switch(
-              value: _activated,
-              activeColor: Colors.green,
-              activeTrackColor: Colors.green,
-              inactiveTrackColor: Colors.red,
-              inactiveThumbColor: Colors.red,
-              onChanged: (bool active) {
-                setState(() => _activated = active);
-              }),
+          flex: 4,
+          child: Slider(
+            min: 0.0,
+            max: 255.0,
+            divisions: 255,
+            value: sliderValueRed,
+            activeColor: Colors.red,
+            onChanged: (newRating) {
+              setState(() => sliderValueRed = newRating);
+            },
+          ),
+        ),Text('${this.sliderValueRed.toStringAsFixed(0)}'),
+        SizedBox(width: 5.0,),
+      ],
+    );
+  }
+
+  Widget _buildSliderButtonRowBlue() {
+    return Row(
+      children: <Widget>[
+        Expanded(
+          flex: 4,
+          child: Slider(
+            min: 0.0,
+            max: 255.0,
+            divisions: 255,
+            value: sliderValueBlue,
+            activeColor: Colors.blue,
+            onChanged: (newRating) {
+              setState(() => sliderValueBlue = newRating);
+            },
+          ),
         ),
+        Text('${this.sliderValueBlue.toStringAsFixed(0)}'),
+        SizedBox(width: 5.0,),
       ],
     );
   }
@@ -98,6 +156,10 @@ class _MyFormPageState extends State<FormPage> {
         title: Text('Tutorial App'),
       ),
       body: Container(
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(this.sliderValueRed.round(),
+              this.sliderValueGreen.round(), this.sliderValueBlue.round(), 1),
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
@@ -108,20 +170,33 @@ class _MyFormPageState extends State<FormPage> {
             SizedBox(
               height: 15.0,
             ),
-            _buildSliderButtonRow(),
+            _buildSlidersAndSwitches(),
             SizedBox(
               height: 15.0,
             ),
             Container(
               alignment: Alignment.center,
               child: RaisedButton(
-                elevation: 4,
-                splashColor: Colors.black,
-                textColor: Colors.white,
-                child: Text('Show results!'),
-                color: Colors.green,
-                onPressed: () => {},
-              ),
+                  elevation: 4,
+                  splashColor: Colors.black,
+                  textColor: Colors.white,
+                  child: Text('Show results!'),
+                  color: Colors.green,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => FormResultPage(
+                            this.myController,
+                            this.name,
+                            this.sliderValueGreen,
+                            this.sliderValueRed,
+                            this.sliderValueBlue,
+                            this.activated,
+                            this.dropDownValue),
+                      ),
+                    );
+                  }),
             ),
           ],
         ),
