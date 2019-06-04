@@ -178,9 +178,11 @@ Here we see how to implement a RaisedButton and add some design to it. Again, th
 
 ### End of Part One
 So after playing around and implementing some widgets, this is what our class looks like. Feel free to check it out and get some inspiration.
-![App Screen Page One, version1](https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page1.PNG)
+***
 
-![App Screen Page One, version2](https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page1_not_active.PNG)
+<img src="https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page1.PNG" alt="App Screen Page One, version1" width="200" height="480"/>
+
+<img src="https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page1_not_active.PNG" alt="App Screen Page One, version2" width="200" height="480"/>
 
 ```dart
 import 'package:flutter/material.dart';
@@ -445,7 +447,9 @@ The build-method this time returns a _WillPopScope_. This indicates that this pa
 
 Now using classic object-oriented programming and the widgets you already know from Page 1 or the [Dart Widget Library](https://api.flutter.dev/flutter/widgets/widgets-library.html) try and design the second page and the passing of data.
 
-![App Screen Page Two, version 1](https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page2.PNG)
+***
+
+<img src="https://github.com/top4ignaz/e-Portfolio-Flutter/blob/master/tutorial_app_screenshots/tutorial_app_page2.PNG" alt="App Screen Page Two, version 1" width="200" height="480"/>
 
 The following code is the end result of page two. Notice that in the Scaffold->AppBar we set the _automaticalleyImplyLeading_ property to true and set the _leading_ property to the Icon "Arrow Back" with an onPressed-method. This method calls Navigator.pop which means that when the back arrow is pressed the page will be popped off the stack and the previous page will be displayed. 
 
