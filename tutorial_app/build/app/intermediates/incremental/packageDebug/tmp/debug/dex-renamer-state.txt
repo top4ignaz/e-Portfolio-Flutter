@@ -1,0 +1,4 @@
+#Tue Jun 04 09:16:13 CEST 2019
+base.0=C\:\\Users\\stive\\Desktop\\e-Portfolio-Flutter-37c75c13c3d07dc4695f536aff0ce1df0a22437a\\tutorial_app\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

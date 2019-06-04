@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
         ),
 
         
-        home: FormPage(),
+        //home: FormPage(),
         routes: {
           '/': (BuildContext context) => FormPage(),
           'form_result': (BuildContext context) => FormResultPage(),
