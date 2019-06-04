@@ -7,6 +7,8 @@ This tutorial will show how to develop a simple application using Stateful/State
 
 At last, for navigation between pages we will be using the navigator functionaliy that ships with flutter.
 
+Find the prepared start project [here](https://github.com/top4ignaz/e-Portfolio-Flutter/tree/37c75c13c3d07dc4695f536aff0ce1df0a22437a)
+
 ## Most important concepts/properties
 **child: / children :<Widget>[]** : this property is probably one of the most important ones used. As you are going about building your widget tree, you are going to have to use parent-child-relationships a lot. Some widgets can only have one child, others may have several widget-children.
 
@@ -380,6 +382,9 @@ class _MyFormPageState extends State<FormPage> {
 }
 
 ```
+***
+
+Find the project after Part One [here](https://github.com/top4ignaz/e-Portfolio-Flutter/tree/bcc75572b218f23b63ab978208847f545fe1d869)
 
 ***
 
@@ -516,3 +521,4 @@ class FormResultPage extends StatelessWidget {
 
 We hope you find this tutorial helpful and we could spark an interest in you. Feel free to check out the repository for our full project code [here](https://github.com/top4ignaz/e-Portfolio-Flutter/tree/master/tutorial_app). 
 
+Find the finished project [here](https://github.com/top4ignaz/e-Portfolio-Flutter/tree/19ceb4a183bf5234292fceffd0df3120a82ec097)
