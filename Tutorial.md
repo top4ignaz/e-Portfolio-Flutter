@@ -173,6 +173,7 @@ RaisedButton(
     onPressed: () => {}
     ),
 //...
+```
 Here we see how to implement a RaisedButton and add some design to it. Again, the most important thing here will be the onPressed-method later.
 
 ### End of Part One
@@ -367,6 +368,131 @@ class _MyFormPageState extends State<FormPage> {
                   ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+## Part Two - Adding Funtionality and Navigation
+### Navigator and Routes
+In Android, a route is equivalent to an Activity. In iOS, a route is equivalent to a ViewController. In Flutter, a route is just a widget. And how do you navigate to the route? By using the navigator!
+
+The pages are managed as a stack, a new page can be added on top of the stack using _push_, _pushReplacement_ or _pushReplacementNamed_ etc. The topmost page will be displayed to the user. As usual when using stacks, 'deleting' the top element is done using _pop_ or a similar pop-method.
+
+### Form Page
+Everything we added so far is working except the button we want to use for navigating to the second page. Also we want to transfer the user input to the next page.
+We do that by using the **Navigator.push-method** where first of all we pass the current context along with a MaterialPageRoute. The MaterialPageRoute requires a builder property which again needs the context and then calls our second page passing our arguments to a new _FormResultPage()_. This should do for page no.1.
+This we do as follows:
+
+```dart
+//...
+RaisedButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => FormResultPage(
+            this.myController,
+            this.name,
+            this.sliderValueGreen,
+            this.sliderValueRed,
+            this.sliderValueBlue,
+            this.activated,
+            this.dropDownValue),
+      ),
+    );
+  }
+),
+//...
+```
+
+### Form Result Page 
+This page will only display values that are passed down to it so this time we will use a StatelessWidget. 
+```dart
+class FormResultPage extends StatelessWidget {
+  final String name;
+  final double greenValue;
+  final double redValue;
+  final double blueValue;
+  final bool activeBGColor;
+  final String dropDownValue;
+  final TextEditingController controller;
+
+  FormResultPage(this.controller, this.name, this.greenValue,this.redValue,this.blueValue,this.activeBGColor,        this.dropDownValue);
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context, false);
+ },
+ );
+}
+```
+First of all we introduce variables that are set in the constructor of this class.
+The build-method this time returns a _WillPopScope_. This indicates that this page will eventually be popped off the stack, excactly what happens when we press the back button in the appbar. In the _onWillPop_ property we call the Navigator.pop function using the BuildContext we can navigate back top the previous page. Again the BuildContext comes in helpful as it indicates where in the widget tree we are and which widget will be displayed next. 
+***
+**Tip for part two:**
+* Use controller.text to get the current text from the TextFormField on Page 1
+***
+
+Now using classic object-oriented programming and the widgets you already know from Page 1 or the [Dart Widget Library](https://api.flutter.dev/flutter/widgets/widgets-library.html) try and design the second page and the passing of data.
+
+The following code is the end result of page two. Notice that in the Scaffold->AppBar we set the _automaticalleyImplyLeading_ property to true and set the _leading_ property to the Icon "Arrow Back" with an onPressed-method. This method calls Navigator.pop which means that when the back arrow is pressed the page will be popped off the stack and the previous page will be displayed. 
+
+```dart
+import 'package:flutter/material.dart';
+class FormResultPage extends StatelessWidget {
+  final String name;
+  final double greenValue;
+  final double redValue;
+  final double blueValue;
+  final bool activeBGColor;
+  final String dropDownValue;
+  final TextEditingController controller;
+
+  FormResultPage(this.controller, this.name, this.greenValue,this.redValue,this.blueValue,this.activeBGColor, this.dropDownValue);
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () {
+        Navigator.pop(context, false);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: true,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+              color: activeBGColor
+                  ? Color.fromRGBO(redValue.round(), greenValue.round(), blueValue.round(), 1)
+                  : Colors.lightBlueAccent),
+          child: Column(
+            children: <Widget>[
+              Spacer(
+                flex: 4,
+              ),
+              Row(
+                children: <Widget>[
+                  Spacer(
+                    flex: 40,
+                  ),
+                  Text(this.controller.text),
+                  Spacer(flex: 4,),
+                  Icon(
+                      this.dropDownValue == "1" ? Icons.build : Icons.settings),
+                  Spacer(
+                    flex: 40,
+                  ),
+                ],
+              ),
+              Spacer(flex: 4),
+            ],
+          ),
         ),
       ),
     );
