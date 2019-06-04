@@ -376,13 +376,15 @@ class _MyFormPageState extends State<FormPage> {
 
 ```
 
+***
+
 ## Part Two - Adding Funtionality and Navigation
 ### Navigator and Routes
 In Android, a route is equivalent to an Activity. In iOS, a route is equivalent to a ViewController. In Flutter, a route is just a widget. And how do you navigate to the route? By using the navigator!
 
 The pages are managed as a stack, a new page can be added on top of the stack using _push_, _pushReplacement_ or _pushReplacementNamed_ etc. The topmost page will be displayed to the user. As usual when using stacks, 'deleting' the top element is done using _pop_ or a similar pop-method.
 
-### Form Page
+### Adding Navigator.push aka Last change on page no.1
 Everything we added so far is working except the button we want to use for navigating to the second page. Also we want to transfer the user input to the next page.
 We do that by using the **Navigator.push-method** where first of all we pass the current context along with a MaterialPageRoute. The MaterialPageRoute requires a builder property which again needs the context and then calls our second page passing our arguments to a new _FormResultPage()_. This should do for page no.1.
 This we do as follows:
@@ -408,6 +410,7 @@ RaisedButton(
 ),
 //...
 ```
+***
 
 ### Form Result Page 
 This page will only display values that are passed down to it so this time we will use a StatelessWidget. 
@@ -500,3 +503,7 @@ class FormResultPage extends StatelessWidget {
 }
 
 ```
+## Conclusion
+
+We hope you find this tutorial helpful and we could spark an interest in you. Feel free to check out the repository for our full project code [here] (https://github.com/top4ignaz/e-Portfolio-Flutter/tree/master/tutorial_app). 
+
